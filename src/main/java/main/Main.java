@@ -24,6 +24,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game.GameType;
 import net.dv8tion.jda.core.entities.impl.GameImpl;
+import properties.PropertiesHandler;
 
 /**
  * @author Sigi
@@ -37,7 +38,8 @@ public class Main {
 	 */
 	public static void main(String[] args) throws Exception {
 		try {
-			JDA jda = new JDABuilder(AccountType.BOT).setToken("").buildBlocking();
+			String token = new PropertiesHandler("token").get("token");
+			JDA jda = new JDABuilder(AccountType.BOT).setToken(token).buildBlocking();
 			jda.getPresence().setGame(new GameImpl("!brothelp", "asd", GameType.DEFAULT));
 
 			CommandListener commandListener = new CommandListener(jda);
