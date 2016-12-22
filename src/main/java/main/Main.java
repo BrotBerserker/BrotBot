@@ -9,6 +9,7 @@ import commands.bindings.BindRegexCommand;
 import commands.bindings.UnbindCommand;
 import commands.bindings.UnbindRegexCommand;
 import commands.general.HelpCommand;
+import commands.general.InfoCommand;
 import commands.karma.AddKarmaCommand;
 import commands.karma.KarmaCommand;
 import commands.karma.KarmaListCommand;
@@ -57,6 +58,7 @@ public class Main {
 	private static void addCommands(CommandListener commandListener) {
 		List<BasicCommand> commands = commandListener.getCommands();
 		commands.add(new HelpCommand(commandListener));
+		commands.add(new InfoCommand());
 		// commands.add(new SetCommand());
 		commands.add(new BindCommand());
 		commands.add(new BindRegexCommand());
