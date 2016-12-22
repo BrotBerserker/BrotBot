@@ -10,7 +10,7 @@ import properties.PropertiesHandler;
 import properties.PropertiesManager;
 
 /**
- * Listens to chat bindings and some does random shit.
+ * Listens to chat bindings.
  *
  * @author Sigi
  *
