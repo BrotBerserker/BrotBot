@@ -8,6 +8,7 @@ import commands.bindings.BindListCommand;
 import commands.bindings.BindRegexCommand;
 import commands.bindings.UnbindCommand;
 import commands.bindings.UnbindRegexCommand;
+import commands.games.PlayCommand;
 import commands.general.HelpCommand;
 import commands.general.InfoCommand;
 import commands.karma.AddKarmaCommand;
@@ -70,6 +71,7 @@ public class Main {
 		commands.add(new KarmaStatsCommand());
 		commands.add(new KarmaListCommand());
 		commands.add(new RemoveKarmaCommand());
+		commands.add(new PlayCommand());
 	}
 
 }
