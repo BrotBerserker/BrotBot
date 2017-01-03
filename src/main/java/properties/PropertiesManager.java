@@ -75,8 +75,8 @@ public class PropertiesManager {
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */
-	public static PropertiesHandler getKarmaConfigForGuild(Guild guild) throws URISyntaxException, IOException {
-		return getPropertiesHandler("servers/" + uniqueGuildName(guild) + "/KarmaConfig");
+	public static PropertiesHandler getKarmaEmotesForGuild(Guild guild) throws URISyntaxException, IOException {
+		return getPropertiesHandler("servers/" + uniqueGuildName(guild) + "/KarmaEmotes");
 	}
 
 	/**

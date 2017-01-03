@@ -34,8 +34,8 @@ public class AddKarmaEmoteCommand extends BasicCommand {
 	public String execute(MessageReceivedEvent event, String... parameters) {
 		try {
 			Emote emote = getEmote(event, parameters[0]);
-			PropertiesHandler karmaConfig = PropertiesManager.getKarmaConfigForGuild(event.getGuild());
-			karmaConfig.add(emote.toString(), parameters[1].trim());
+			PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
+			karmaEmotes.add(emote.toString(), parameters[1].trim());
 			return "Reaction " + emote.getAsMention() + " now gives " + parameters[1].trim() + " Karma!";
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);

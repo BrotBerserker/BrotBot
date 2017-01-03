@@ -37,8 +37,8 @@ public class RemoveKarmaEmoteCommand extends BasicCommand {
 	public String execute(MessageReceivedEvent event, String... parameters) {
 		try {
 			Emote emote = getEmote(event, parameters[0]);
-			PropertiesHandler karmaConfig = PropertiesManager.getKarmaConfigForGuild(event.getGuild());
-			boolean removed = karmaConfig.remove(emote.toString());
+			PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
+			boolean removed = karmaEmotes.remove(emote.toString());
 			return removed ? "Removed Karma emote!" : "There was nothing to remove!";
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);

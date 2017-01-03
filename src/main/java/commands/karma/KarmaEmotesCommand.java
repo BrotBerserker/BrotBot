@@ -16,11 +16,11 @@ import properties.PropertiesManager;
  * @author Sigi
  *
  */
-public class KarmaListCommand extends BasicCommand {
+public class KarmaEmotesCommand extends BasicCommand {
 
 	@Override
 	public String getName() {
-		return "karmalist";
+		return "karmaemotes";
 	}
 
 	@Override
@@ -31,8 +31,8 @@ public class KarmaListCommand extends BasicCommand {
 	@Override
 	public String execute(MessageReceivedEvent event, String... parameters) {
 		try {
-			PropertiesHandler karmaConfig = PropertiesManager.getKarmaConfigForGuild(event.getGuild());
-			List<Entry<String, String>> entries = karmaConfig.getEntriesSortedByIntValues(false);
+			PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
+			List<Entry<String, String>> entries = karmaEmotes.getEntriesSortedByIntValues(false);
 			StringBuilder bob = new StringBuilder("**~ Karma Emotes for " + event.getGuild().getName() + ": ~**");
 			for (Entry<String, String> entry : entries) {
 				Emote emote = event.getGuild().getEmoteById(entry.getKey().substring(entry.getKey().indexOf("(") + 1, entry.getKey().indexOf(")")));

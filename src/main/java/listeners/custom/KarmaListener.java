@@ -164,15 +164,15 @@ public class KarmaListener extends ListenerAdapter {
 		}
 
 		Emote emote = getEmote(event);
-		PropertiesHandler karmaConfig = PropertiesManager.getKarmaConfigForGuild(emote.getGuild());
+		PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(emote.getGuild());
 
 		// Emote is not a Karma emote -> give 0 Karma
-		if (!karmaConfig.contains(emote.toString())) {
+		if (!karmaEmotes.contains(emote.toString())) {
 			return 0;
 		}
 
 		// Give Karma
-		return Integer.parseInt(karmaConfig.get(emote.toString()));
+		return Integer.parseInt(karmaEmotes.get(emote.toString()));
 	}
 
 	private User getAuthor(GenericMessageReactionEvent event) throws RateLimitedException {
