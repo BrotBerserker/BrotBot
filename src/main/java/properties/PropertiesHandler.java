@@ -145,6 +145,29 @@ public class PropertiesHandler {
 		return list;
 	}
 
+	/**
+	 * Returns a sorted list of entries. Only use this if all keys of the
+	 * properties can be parsed to int values.
+	 *
+	 * @param asc
+	 *            true for ascending, false for descending
+	 * @return The sorted list
+	 */
+	public List<Entry<String, String>> getEntriesSortedByIntKeys(boolean asc) {
+		List<Entry<String, String>> list = new ArrayList<Entry<String, String>>();
+		for (Entry<Object, Object> entry : properties.entrySet()) {
+			list.add(new AbstractMap.SimpleEntry<String, String>(entry.getKey().toString(), entry.getValue().toString()));
+		}
+		Collections.sort(list, (Comparator<Entry<String, String>>) (Entry<String, String> e1, Entry<String, String> e2) -> {
+			if (asc) {
+				return Integer.parseInt(e1.getKey()) - Integer.parseInt(e2.getKey());
+			} else {
+				return Integer.parseInt(e2.getKey()) - Integer.parseInt(e1.getKey());
+			}
+		});
+		return list;
+	}
+
 	private void save() throws IOException, FileNotFoundException {
 		properties.store(new FileOutputStream(file), "Chat bindings for " + fileName);
 	}
