@@ -17,6 +17,7 @@ import commands.karma.KarmaCommand;
 import commands.karma.KarmaListCommand;
 import commands.karma.KarmaStatsCommand;
 import commands.karma.RemoveKarmaEmoteCommand;
+import commands.karma.RemoveKarmaLevelCommand;
 import listeners.custom.BindingsListener;
 import listeners.custom.CommandListener;
 import listeners.custom.DalerListener;
@@ -74,6 +75,7 @@ public class Main {
 		commands.add(new RemoveKarmaEmoteCommand());
 		commands.add(new PlayCommand());
 		commands.add(new AddKarmaLevelCommand());
+		commands.add(new RemoveKarmaLevelCommand());
 	}
 
 }
