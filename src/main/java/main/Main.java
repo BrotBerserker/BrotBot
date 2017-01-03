@@ -12,6 +12,7 @@ import commands.games.PlayCommand;
 import commands.general.HelpCommand;
 import commands.general.InfoCommand;
 import commands.karma.AddKarmaEmoteCommand;
+import commands.karma.AddKarmaLevelCommand;
 import commands.karma.KarmaCommand;
 import commands.karma.KarmaListCommand;
 import commands.karma.KarmaStatsCommand;
@@ -72,6 +73,7 @@ public class Main {
 		commands.add(new KarmaListCommand());
 		commands.add(new RemoveKarmaEmoteCommand());
 		commands.add(new PlayCommand());
+		commands.add(new AddKarmaLevelCommand());
 	}
 
 }
