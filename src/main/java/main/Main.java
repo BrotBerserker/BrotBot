@@ -11,11 +11,11 @@ import commands.bindings.UnbindRegexCommand;
 import commands.games.PlayCommand;
 import commands.general.HelpCommand;
 import commands.general.InfoCommand;
-import commands.karma.AddKarmaCommand;
+import commands.karma.AddKarmaEmoteCommand;
 import commands.karma.KarmaCommand;
 import commands.karma.KarmaListCommand;
 import commands.karma.KarmaStatsCommand;
-import commands.karma.RemoveKarmaCommand;
+import commands.karma.RemoveKarmaEmoteCommand;
 import listeners.custom.BindingsListener;
 import listeners.custom.CommandListener;
 import listeners.custom.DalerListener;
@@ -66,11 +66,11 @@ public class Main {
 		commands.add(new UnbindCommand());
 		commands.add(new UnbindRegexCommand());
 		commands.add(new BindListCommand());
-		commands.add(new AddKarmaCommand());
+		commands.add(new AddKarmaEmoteCommand());
 		commands.add(new KarmaCommand());
 		commands.add(new KarmaStatsCommand());
 		commands.add(new KarmaListCommand());
-		commands.add(new RemoveKarmaCommand());
+		commands.add(new RemoveKarmaEmoteCommand());
 		commands.add(new PlayCommand());
 	}
 

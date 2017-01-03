@@ -13,11 +13,11 @@ import properties.PropertiesManager;
  * @author Sigi
  *
  */
-public class AddKarmaCommand extends BasicCommand {
+public class AddKarmaEmoteCommand extends BasicCommand {
 
 	@Override
 	public String getName() {
-		return "addkarma";
+		return "addkarmaemote";
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class AddKarmaCommand extends BasicCommand {
 
 	@Override
 	public String getExampleUsage() {
-		return "!addkarma :pogchamp: 5";
+		return "!addkarmaemote :pogchamp: 5";
 	}
 
 }

@@ -16,11 +16,11 @@ import properties.PropertiesManager;
  * @author Sigi
  *
  */
-public class RemoveKarmaCommand extends BasicCommand {
+public class RemoveKarmaEmoteCommand extends BasicCommand {
 
 	@Override
 	public String getName() {
-		return "removekarma";
+		return "removekarmaemote";
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class RemoveKarmaCommand extends BasicCommand {
 
 	@Override
 	public String getExampleUsage() {
-		return "!removekarma :pogchamp:";
+		return "!removekarmaemote :pogchamp:";
 	}
 
 	@Override
