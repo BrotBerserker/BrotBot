@@ -32,7 +32,7 @@ public class BindRegexCommand extends BasicCommand {
 
 	@Override
 	public String getExampleUsage() {
-		return "!bindregex [0-9]+ = That's a nice number.";
+		return "!bindregex .*(deutschland|Deutschland).* = That's a Nudelholz!";
 	}
 
 	@Override
