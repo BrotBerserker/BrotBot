@@ -16,6 +16,8 @@ import commands.karma.KarmaCommand;
 import commands.karma.KarmaListCommand;
 import commands.karma.KarmaStatsCommand;
 import commands.karma.RemoveKarmaCommand;
+import commands.translation.LanguagesCommand;
+import commands.translation.TranslateCommand;
 import listeners.custom.BindingsListener;
 import listeners.custom.CommandListener;
 import listeners.custom.DalerListener;
@@ -72,6 +74,8 @@ public class Main {
 		commands.add(new KarmaListCommand());
 		commands.add(new RemoveKarmaCommand());
 		commands.add(new PlayCommand());
+		commands.add(new TranslateCommand());
+		commands.add(new LanguagesCommand());
 	}
 
 }
