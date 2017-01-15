@@ -46,9 +46,9 @@ public class DalerListener extends BasicChatListener {
 
 	private String getRandomMessage() {
 		List<String> list = new ArrayList<String>();
-		list.add("ğŸ¶ Tunak tunak tun, tunak tunak tun, tunak tunak tun dadada! ğŸ¶");
-		list.add("DÃ¶Ã¶Ã¶Ã¶Ã¶Ã¶Ã¶Ã¶nnneeeeeeer!");
-		list.add("ğŸ¶ Dalail lam wutschde dunne molita Sohle MÃ¼ll im Pokal! ğŸ¶");
+		list.add(":notes: Tunak tunak tun, tunak tunak tun, tunak tunak tun dadada! :notes:");
+		list.add("Dööööööööönnneeeeeeer!");
+		list.add(":notes: Dalail lam wutschde dunne molita Sohle Müll im Pokal! :notes:");
 		return list.get(new Random().nextInt(list.size()));
 	}
 }

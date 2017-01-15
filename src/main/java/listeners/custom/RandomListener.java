@@ -6,9 +6,7 @@ import java.util.Random;
 import listeners.base.BasicChatListener;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Emote;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 
 /**
  * Sends random responses to group chat messages.
@@ -25,19 +23,20 @@ public class RandomListener extends BasicChatListener {
 		super(jda);
 	}
 
-	@Override
-	public void onUserGameUpdate(UserGameUpdateEvent event) {
-		if (event.getUser().isBot()) {
-			return;
-		}
-
-		Game game = event.getGuild().getMember(event.getUser()).getGame();
-		if (game == null) {
-			return;
-		}
-
-		event.getGuild().getTextChannels().get(0).sendMessage(event.getUser().getName() + " zockt jetzt " + game.getName() + "! Wer zockt mit?").queue();
-	}
+	// @Override
+	// public void onUserGameUpdate(UserGameUpdateEvent event) {
+	// if (event.getUser().isBot()) {
+	// return;
+	// }
+	//
+	// Game game = event.getGuild().getMember(event.getUser()).getGame();
+	// if (game == null) {
+	// return;
+	// }
+	//
+	// event.getGuild().getTextChannels().get(0).sendMessage(event.getUser().getName()
+	// + " zockt jetzt " + game.getName() + "! Wer zockt mit?").queue();
+	// }
 
 	@Override
 	protected void handlePublicMessage(MessageReceivedEvent event) throws Exception {

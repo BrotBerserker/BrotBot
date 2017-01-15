@@ -31,12 +31,12 @@ public class BindListCommand extends BasicCommand {
 			StringBuilder bob = new StringBuilder("**~ Bindings for " + event.getGuild().getName() + ": ~**");
 			PropertiesHandler bindings = PropertiesManager.getChatBindingsForGuild(event.getGuild());
 			for (String binding : bindings.getKeys()) {
-				bob.append("\n🗒  " + binding);
+				bob.append("\n:notepad_spiral: �  " + binding);
 			}
 			PropertiesHandler regexBindings = PropertiesManager.getRegexBindingsForGuild(event.getGuild());
 			bob.append("\n\n**~ Regex bindings: ~**");
 			for (String regexBinding : regexBindings.getKeys()) {
-				bob.append("\n⚙ " + regexBinding);
+				bob.append("\n:gear: " + regexBinding);
 			}
 			return bob.toString();
 		} catch (Exception e) {

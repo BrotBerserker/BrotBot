@@ -18,6 +18,8 @@ import commands.karma.KarmaEmotesCommand;
 import commands.karma.KarmaStatsCommand;
 import commands.karma.RemoveKarmaEmoteCommand;
 import commands.karma.RemoveKarmaLevelCommand;
+import commands.translation.LanguagesCommand;
+import commands.translation.TranslateCommand;
 import listeners.custom.BindingsListener;
 import listeners.custom.CommandListener;
 import listeners.custom.DalerListener;
@@ -76,6 +78,8 @@ public class Main {
 		commands.add(new PlayCommand());
 		commands.add(new AddKarmaLevelCommand());
 		commands.add(new RemoveKarmaLevelCommand());
+		commands.add(new TranslateCommand());
+		commands.add(new LanguagesCommand());
 	}
 
 }

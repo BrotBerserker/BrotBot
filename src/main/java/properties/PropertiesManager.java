@@ -107,6 +107,20 @@ public class PropertiesManager {
 		return getPropertiesHandler("servers/" + uniqueGuildName(guild) + "/KarmaLevels");
 	}
 
+	/**
+	 * Returns a {@link PropertiesHandler} for handling a {@link Guild}'s
+	 * translations.
+	 *
+	 * @param guild
+	 *            The {@link Guild}
+	 * @return The {@link PropertiesHandler}
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
+	public static PropertiesHandler getTranslationsForGuild(Guild guild) throws URISyntaxException, IOException {
+		return getPropertiesHandler("servers/" + uniqueGuildName(guild) + "/Translations");
+	}
+
 	private static String uniqueGuildName(Guild guild) {
 		return guild.getName() + " - " + guild.getId();
 	}
