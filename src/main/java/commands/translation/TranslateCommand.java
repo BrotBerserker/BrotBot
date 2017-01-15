@@ -13,6 +13,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
 
+/**
+ * Translates everything a user writes to another language.
+ *
+ * @author Sigi
+ *
+ */
 public class TranslateCommand extends BasicCommand {
 
 	@Override
@@ -22,7 +28,7 @@ public class TranslateCommand extends BasicCommand {
 
 	@Override
 	public String getShortDescription() {
-		return "todo";
+		return "Translates everything a user writes to another language.";
 	}
 
 	@Override
@@ -47,8 +53,6 @@ public class TranslateCommand extends BasicCommand {
 			throw new CommandExecutionException(e);
 		}
 
-		// event.getJDA().addEventListener(new TranslateListener(event.getJDA(),
-		// user, parameters[1], parameters[2]));
 	}
 
 	@Override
