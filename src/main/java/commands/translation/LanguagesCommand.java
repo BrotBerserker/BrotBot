@@ -46,4 +46,13 @@ public class LanguagesCommand extends BasicCommand {
 		}
 	}
 
+	@Override
+	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+		return execute(event, parameters);
+	}
+
+	@Override
+	public boolean isPrivateExecutionAllowed() {
+		return true;
+	}
 }
