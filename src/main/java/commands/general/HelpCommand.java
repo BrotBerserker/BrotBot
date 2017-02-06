@@ -55,7 +55,7 @@ public class HelpCommand extends BasicCommand {
 		builder.setColor(Color.RED);
 		builder.setDescription("Available Commands");
 		for (BasicCommand command : commandListener.getCommands()) {
-			builder.addField("!" + command.getName(), command.getShortDescription(), true);
+			builder.addField("!" + command.getName(), command.getShortDescription(), false);
 		}
 
 		try {
@@ -65,6 +65,17 @@ public class HelpCommand extends BasicCommand {
 		} catch (RateLimitedException e) {
 			throw new CommandExecutionException(e);
 		}
+	}
+
+	@Override
+	public boolean isPrivateExecutionAllowed() {
+		return true;
+	}
+
+	@Override
+	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+		execute(event, parameters);
+		return " ";
 	}
 
 }
