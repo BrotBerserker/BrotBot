@@ -15,10 +15,12 @@ import commands.karma.AddKarmaEmoteCommand;
 import commands.karma.AddKarmaLevelCommand;
 import commands.karma.KarmaCommand;
 import commands.karma.KarmaEmotesCommand;
+import commands.karma.KarmaLevelsCommand;
 import commands.karma.KarmaStatsCommand;
 import commands.karma.RemoveKarmaEmoteCommand;
 import commands.karma.RemoveKarmaLevelCommand;
 import commands.translation.LanguagesCommand;
+import commands.translation.StopTranslateCommand;
 import commands.translation.TranslateCommand;
 import listeners.custom.BindingsListener;
 import listeners.custom.CommandListener;
@@ -62,24 +64,35 @@ public class Main {
 
 	private static void addCommands(CommandListener commandListener) {
 		List<BasicCommand> commands = commandListener.getCommands();
+
+		// general
 		commands.add(new HelpCommand(commandListener));
 		commands.add(new InfoCommand());
-		// commands.add(new SetCommand());
+
+		// bindings
 		commands.add(new BindCommand());
 		commands.add(new BindRegexCommand());
 		commands.add(new UnbindCommand());
 		commands.add(new UnbindRegexCommand());
 		commands.add(new BindListCommand());
-		commands.add(new AddKarmaEmoteCommand());
+
+		// karma
 		commands.add(new KarmaCommand());
 		commands.add(new KarmaStatsCommand());
-		commands.add(new KarmaEmotesCommand());
+		commands.add(new AddKarmaEmoteCommand());
 		commands.add(new RemoveKarmaEmoteCommand());
-		commands.add(new PlayCommand());
+		commands.add(new KarmaEmotesCommand());
 		commands.add(new AddKarmaLevelCommand());
 		commands.add(new RemoveKarmaLevelCommand());
+		commands.add(new KarmaLevelsCommand());
+
+		// Translate
 		commands.add(new TranslateCommand());
+		commands.add(new StopTranslateCommand());
 		commands.add(new LanguagesCommand());
+
+		// Games
+		commands.add(new PlayCommand());
 	}
 
 }
