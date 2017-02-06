@@ -19,10 +19,10 @@ import net.dv8tion.jda.core.entities.Guild;
 
 /**
  * Contains chat bindings for a {@link Guild}. A chat binding is a key/value
- * pair and is used by {@link BindingsListener}. When this listener is
- * active and a user sends a string matching a binding's key, the bot will
- * respond with the binding's value. Example binding: Dies das = Ananas. User
- * writes "Dies das", bot responds with "Ananas."
+ * pair and is used by {@link BindingsListener}. When this listener is active
+ * and a user sends a string matching a binding's key, the bot will respond with
+ * the binding's value. Example binding: Dies das = Ananas. User writes "Dies
+ * das", bot responds with "Ananas."
  *
  * @author Sigi
  *
@@ -32,6 +32,7 @@ public class PropertiesHandler {
 	private Properties properties;
 	private String fileName;
 	private File file;
+	private String description;
 
 	/**
 	 * @param fileName
@@ -40,6 +41,7 @@ public class PropertiesHandler {
 	 */
 	public PropertiesHandler(String fileName) throws URISyntaxException, IOException {
 		this.fileName = fileName;
+		description = fileName.substring(fileName.lastIndexOf("/") + 1);
 		initializeProperties();
 	}
 
@@ -123,6 +125,19 @@ public class PropertiesHandler {
 	}
 
 	/**
+	 * Gets a list of all binding commands for this server
+	 *
+	 * @return List of bindings
+	 */
+	public List<String> getValues() {
+		List<String> list = new ArrayList<String>();
+		for (Object object : properties.values()) {
+			list.add(object.toString());
+		}
+		return list;
+	}
+
+	/**
 	 * Returns a sorted list of entries. Only use this if all values of the
 	 * properties can be parsed to int values.
 	 *
@@ -169,7 +184,7 @@ public class PropertiesHandler {
 	}
 
 	private void save() throws IOException, FileNotFoundException {
-		properties.store(new FileOutputStream(file), "Chat bindings for " + fileName);
+		properties.store(new FileOutputStream(file), description + " for " + fileName);
 	}
 
 }
