@@ -6,6 +6,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
 
+/**
+ * Removes a Karma level.
+ * 
+ * @author Sigi
+ *
+ */
 public class RemoveKarmaLevelCommand extends BasicCommand {
 
 	@Override
