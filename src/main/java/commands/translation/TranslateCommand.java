@@ -43,16 +43,20 @@ public class TranslateCommand extends BasicCommand {
 
 		try {
 			PropertiesHandler translations = PropertiesManager.getTranslationsForGuild(event.getGuild());
+			String newTranslation = parameters[1] + "-" + parameters[2];
 			if (translations.contains(username)) {
-				translations.add(username, translations.get(username) + "," + parameters[1] + "-" + parameters[2]);
+				if (translations.get(username).contains(newTranslation)) {
+					return user.getName() + " already speaks \"" + parameters[2] + "\"!";
+				}
+				translations.add(username, translations.get(username) + "," + newTranslation);
 			} else {
-				translations.add(username, parameters[1] + "-" + parameters[2]);
+				translations.add(username, newTranslation);
 			}
+			event.getJDA().addEventListener(new TranslateListener(event.getJDA(), user, parameters[1], parameters[2]));
 			return user.getName() + " now speaks \"" + parameters[2] + "\"!";
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);
 		}
-
 	}
 
 	@Override
