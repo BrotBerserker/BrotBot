@@ -66,8 +66,8 @@ public abstract class BasicCommand {
 	 * @return A message that will be send to the private chat in which the
 	 *         command has been called
 	 */
-	public final String executePrivate(MessageReceivedEvent event, String... parameters) {
-		throw new CommandExecutionException("This command is not supported in private channels!");
+	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+		throw new CommandExecutionException("This command's functionality is not yet implemented for private channels, but will be soon!");
 	}
 
 	/**
@@ -108,6 +108,22 @@ public abstract class BasicCommand {
 	 */
 	public boolean isExecutable(MessageReceivedEvent event, String... parameters) {
 		return true;
+	}
+
+	/**
+	 * Determines whether this command can be executed in a private chat between
+	 * a user and the bot. If an attempt to use a command in a private chat is
+	 * made, this method as well as
+	 * {@link BasicCommand#isExecutable(MessageReceivedEvent, String...)
+	 * isExecutable(...)} have to return <code>true</code> before
+	 * {@link BasicCommand#executePrivate(MessageReceivedEvent, String...)
+	 * executePrivate(...)} will be called. . <br>
+	 *
+	 * @return <code>true</code> if this command can be used in a private chat.
+	 *         Default value: <code>false</code>
+	 */
+	public boolean isPrivateExecutionAllowed() {
+		return false;
 	}
 
 	/**
@@ -171,6 +187,7 @@ public abstract class BasicCommand {
 		s += "\nCommand Info: !" + getName() + "\n" + StringUtils.repeat("=", 15 + getName().length());
 		s += "\n* " + getShortDescription();
 		s += "\n* <Parameters: " + getRequiredParameterCount() + ">";
+		s += "\n* <Private: " + isPrivateExecutionAllowed() + ">";
 		s += "\n* <Role: " + getRequiredRole() + ">";
 		s += "\n*";
 		s += "\n* " + getLongDescription();

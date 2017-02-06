@@ -7,6 +7,7 @@ import commands.base.BasicCommand;
 import exceptions.CommandExecutionException;
 import listeners.base.BasicChatListener;
 import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -42,11 +43,12 @@ public class CommandListener extends BasicChatListener {
 				sendPrivate(event, command.getHelpMessage());
 				return;
 			}
-			// TODO private channel commands
 			if ((message + " ").startsWith("!" + command.getName() + " ")) {
-				// sendPrivate(event, handleCommandPrivate(event, command)); ?
-				// return;
-				throw new CommandExecutionException("Commands in private chat are not yet supported!");
+				if (command.isPrivateExecutionAllowed()) {
+					sendPrivate(event, handleCommand(event, command));
+				} else {
+					throw new CommandExecutionException("This command cannot be used in a private chat!");
+				}
 			}
 		}
 	}
@@ -91,7 +93,7 @@ public class CommandListener extends BasicChatListener {
 
 	private String handleCommandWithoutParams(MessageReceivedEvent event, BasicCommand command) {
 		if (command.isExecutable(event)) {
-			return command.execute(event);
+			return executeCommand(event, command);
 		} else {
 			throw new CommandExecutionException(command.getErrorMessage());
 		}
@@ -109,10 +111,17 @@ public class CommandListener extends BasicChatListener {
 		}
 
 		if (command.isExecutable(event, parameters)) {
-			return command.execute(event, parameters);
+			return executeCommand(event, command, parameters);
 		} else {
 			throw new CommandExecutionException(command.getErrorMessage());
 		}
+	}
+
+	private String executeCommand(MessageReceivedEvent event, BasicCommand command, String... parameters) {
+		if (event.getChannelType() == ChannelType.PRIVATE) {
+			return command.executePrivate(event, parameters);
+		}
+		return command.execute(event, parameters);
 	}
 
 }

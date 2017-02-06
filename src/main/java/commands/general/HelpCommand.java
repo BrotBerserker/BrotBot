@@ -60,7 +60,6 @@ public class HelpCommand extends BasicCommand {
 
 		try {
 			event.getAuthor().openPrivateChannel().block();
-			// event.getAuthor().getPrivateChannel().sendMessage(bob.toString()).queue();
 			event.getAuthor().getPrivateChannel().sendMessage(builder.build()).queue();
 			return "Yo " + event.getAuthor().getAsMention() + ", ich hab dir die Liste geschickt.";
 		} catch (RateLimitedException e) {
