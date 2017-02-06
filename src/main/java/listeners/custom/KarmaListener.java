@@ -2,6 +2,7 @@ package listeners.custom;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Guild;
@@ -57,11 +58,11 @@ public class KarmaListener extends ListenerAdapter {
 		String username = getAuthor(event).getName() + "#" + getAuthor(event).getDiscriminator();
 
 		int oldKarma = 0;
-		if(karma.contains(username)){
-			oldKarma=Integer.parseInt(karma.get(username));
+		if (karma.contains(username)) {
+			oldKarma = Integer.parseInt(karma.get(username));
 		}
 
-		int newKarma = oldKarma+karmaPoints;
+		int newKarma = oldKarma + karmaPoints;
 
 		karma.add(username, String.valueOf(newKarma));
 
@@ -73,38 +74,12 @@ public class KarmaListener extends ListenerAdapter {
 		PropertiesHandler karmaLevels = PropertiesManager.getKarmaLevelsForGuild(guild);
 		Member author = guild.getMember(getAuthor(event));
 
-		// For each Karma level (e.g. 100 points, 200 points, 300 points, ...)
-		for (String level : karmaLevels.getKeys()) {
-
-			// Get the appropriate role
-			String roleName = karmaLevels.get(level);
-			Role role = getRole(roleName, guild);
-
-			// Get the points required for that role
-			int levelPoints = Integer.parseInt(level);
-
-			// If the user reached the points and doesn't already have the role -> assign it
-			if(newKarma >= levelPoints && !author.getRoles().contains(role)){
-				guild.getController().addRolesToMember(author, role).queue();
-				event.getChannel().sendMessage("Yay! "+author.getEffectiveName()+" reached "+levelPoints+ " Karma and is now considered a "+role.getName()+"!").queue();
-			}
-			// Remove the role if the user has lost too many karma points
-			else if(newKarma < levelPoints && author.getRoles().contains(role)){
-				guild.getController().removeRolesFromMember(author, role).queue();
-				event.getChannel().sendMessage("Oh noes! "+author.getEffectiveName()+" doesn't have enough Karma to be a "+role.getName()+" anymore!").queue();
-			}
-		}
-	}
-
-	private void updateKarmaLevelOverwrite(GenericMessageReactionEvent event, int newKarma) throws URISyntaxException, IOException, RateLimitedException {
-		Guild guild = getEmote(event).getGuild();
-		PropertiesHandler karmaLevels = PropertiesManager.getKarmaLevelsForGuild(guild);
-		Member author = guild.getMember(getAuthor(event));
-
 		Role oldRole = null;
 		Role newRole = null;
-//		int oldPoints = Integer.MIN_VALUE;
+
+		// int oldPoints = Integer.MIN_VALUE;
 		int maxPoints = Integer.MIN_VALUE;
+
 		// For each Karma level (e.g. 100 points, 200 points, 300 points, ...)
 		for (String level : karmaLevels.getKeys()) {
 
@@ -113,41 +88,33 @@ public class KarmaListener extends ListenerAdapter {
 			Role role = getRole(roleName, guild);
 
 			// Set old role
-			if(oldRole != null && author.getRoles().contains(role)){
+			if (oldRole == null && author.getRoles().contains(role)) {
 				oldRole = role;
+				// oldRole = new RoleImpl(role.getId(), guild);
 			}
 
 			// Get the points required for that role
 			int levelPoints = Integer.parseInt(level);
 
 			// Set max points
-			if(newKarma >= levelPoints && levelPoints > maxPoints){
+			if (newKarma >= levelPoints && levelPoints > maxPoints) {
 				maxPoints = levelPoints;
 				newRole = role;
+				// newRole = new RoleImpl(role.getId(), guild);
 			}
-
-//			// If the user reached the points and doesn't already have the role -> assign it
-//			if(newKarma >= levelPoints && !author.getRoles().contains(role)){
-//				guild.getController().addRolesToMember(author, role).queue();
-//				event.getChannel().sendMessage("Yay! "+author.getEffectiveName()+" reached "+levelPoints+ " Karma and is now considered a "+role.getName()+"!").queue();
-//			}
-//			// Remove the role if the user has lost too many karma points
-//			else if(newKarma < levelPoints && author.getRoles().contains(role)){
-//				guild.getController().removeRolesFromMember(author, role).queue();
-//				event.getChannel().sendMessage("Oh noes! "+author.getEffectiveName()+" doesn't have enough Karma to be a "+role.getName()+" anymore!").queue();
-//			}
 		}
-		if(newRole != null && !newRole.equals(oldRole)){
-			guild.getController().removeRolesFromMember(author, oldRole).queue();
-			guild.getController().addRolesToMember(author, newRole).queue();
-			event.getChannel().sendMessage("Yay! "+author.getEffectiveName()+" reached "+maxPoints+ " Karma and is now considered a "+newRole.getName()+"!").queue();
+		if (newRole != null && !newRole.equals(oldRole)) {
+			guild.getController().modifyMemberRoles(author, Arrays.asList(newRole), Arrays.asList(oldRole)).block();
+
+			event.getChannel()
+					.sendMessage("Listen up everyone! " + author.getEffectiveName() + " reached `" + maxPoints + "` Karma and is now considered a **" + newRole.getName() + "**!")
+					.queue();
 		}
 	}
 
-
-	private Role getRole(String roleName, Guild guild){
+	private Role getRole(String roleName, Guild guild) {
 		for (Role role : guild.getRoles()) {
-			if(role.getName().equalsIgnoreCase(roleName)){
+			if (role.getName().equalsIgnoreCase(roleName)) {
 				return role;
 			}
 		}
