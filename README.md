@@ -15,5 +15,6 @@ BrotBot, a Discord Bot for doing usual and unusual stuff.
 ## Upcoming Features
 - Configure the Bot! (language, command prefix, permissions, etc.)
 - Make the Bot friendlier/unfriendlier!
+- Organize Tournaments!
 
 #### Also, make sure to visit BrotBot's Trello! https://trello.com/b/MsDs9PZg/brotbot
