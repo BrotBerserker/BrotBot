@@ -6,6 +6,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
 
+/**
+ * Adds a Karma level.
+ *
+ * @author Sigi
+ *
+ */
 public class AddKarmaLevelCommand extends BasicCommand {
 
 	@Override
@@ -27,8 +33,8 @@ public class AddKarmaLevelCommand extends BasicCommand {
 	public String execute(MessageReceivedEvent event, String... parameters) {
 		try {
 			PropertiesHandler karmaLevels = PropertiesManager.getKarmaLevelsForGuild(event.getGuild());
-			boolean updated = karmaLevels.add(parameters[0], parameters[1]);
-			return "Karmalevel \"" + parameters[1] + "\"" + (updated ? "updated!" : "created!");
+			boolean updated = karmaLevels.add(parameters[0].trim(), parameters[1].trim());
+			return "Karmalevel \"" + parameters[1].trim() + "\"" + (updated ? " updated!" : " created!");
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);
 		}
@@ -37,12 +43,12 @@ public class AddKarmaLevelCommand extends BasicCommand {
 	@Override
 	public boolean isExecutable(MessageReceivedEvent event, String... parameters) {
 		try {
-			Integer.parseInt(parameters[0]);
+			Integer.parseInt(parameters[0].trim());
 		} catch (NumberFormatException e) {
 			return false;
 		}
 
-		if (event.getGuild().getRolesByName(parameters[1], true).size() != 1) {
+		if (event.getGuild().getRolesByName(parameters[1].trim(), true).size() != 1) {
 			return false;
 		}
 
