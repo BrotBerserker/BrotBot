@@ -9,6 +9,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
 
+/**
+ * Displays this server's Karma levels .
+ * 
+ * @author Sigi
+ *
+ */
 public class KarmaLevelsCommand extends BasicCommand {
 
 	@Override
@@ -18,7 +24,7 @@ public class KarmaLevelsCommand extends BasicCommand {
 
 	@Override
 	public String getShortDescription() {
-		return "Displays the list of Karma levels.";
+		return "Displays this server's Karma levels .";
 	}
 
 	@Override
