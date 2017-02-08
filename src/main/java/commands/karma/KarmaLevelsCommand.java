@@ -11,7 +11,7 @@ import properties.PropertiesManager;
 
 /**
  * Displays this server's Karma levels .
- * 
+ *
  * @author Sigi
  *
  */
@@ -42,4 +42,8 @@ public class KarmaLevelsCommand extends BasicCommand {
 		}
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
 }

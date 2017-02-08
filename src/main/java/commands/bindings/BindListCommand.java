@@ -44,4 +44,9 @@ public class BindListCommand extends BasicCommand {
 		}
 	}
 
+	@Override
+	public String getCategory() {
+		return "Bindings";
+	}
+
 }

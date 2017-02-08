@@ -175,6 +175,16 @@ public abstract class BasicCommand {
 	}
 
 	/**
+	 * Returns the command's category. At the moment it is only used by
+	 * {@link HelpCommand}. Default value is <code>"General"</code>.
+	 *
+	 * @return The category
+	 */
+	public String getCategory() {
+		return "General";
+	}
+
+	/**
 	 * Returns the message that will be displayed when the command is called
 	 * using the "-help" option. Usually you don't have to override this,
 	 * instead you can override {@link #getLongDescription()} and

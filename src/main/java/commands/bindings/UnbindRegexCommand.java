@@ -50,4 +50,9 @@ public class UnbindRegexCommand extends BasicCommand {
 		return "BrotCommander";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Bindings";
+	}
+
 }

@@ -14,9 +14,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	
+
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>net.dv8tion</groupId>
 			<artifactId>JDA</artifactId>
 			<version>3.0.BETA2_108</version>

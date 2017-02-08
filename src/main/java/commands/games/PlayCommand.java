@@ -67,6 +67,11 @@ public class PlayCommand extends BasicCommand {
 		return "!play Rocket League";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Games";
+	}
+
 	private String getMessage() {
 		StringBuilder bob = new StringBuilder("**~" + game + " players: ~**");
 		for (String player : players) {

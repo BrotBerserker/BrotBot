@@ -44,4 +44,8 @@ public class KarmaEmotesCommand extends BasicCommand {
 		}
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
 }

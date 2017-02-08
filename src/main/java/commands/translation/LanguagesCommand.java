@@ -55,4 +55,9 @@ public class LanguagesCommand extends BasicCommand {
 	public boolean isPrivateExecutionAllowed() {
 		return true;
 	}
+
+	@Override
+	public String getCategory() {
+		return "Translation";
+	}
 }

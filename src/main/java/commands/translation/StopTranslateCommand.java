@@ -68,4 +68,9 @@ public class StopTranslateCommand extends BasicCommand {
 		return "Please mention a user as 1. parameter!";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Translation";
+	}
+
 }

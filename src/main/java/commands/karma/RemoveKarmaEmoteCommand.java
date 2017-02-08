@@ -71,4 +71,8 @@ public class RemoveKarmaEmoteCommand extends BasicCommand {
 		return "BrotCommander";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
 }

@@ -8,7 +8,7 @@ import properties.PropertiesManager;
 
 /**
  * Removes a Karma level.
- * 
+ *
  * @author Sigi
  *
  */
@@ -65,4 +65,8 @@ public class RemoveKarmaLevelCommand extends BasicCommand {
 		return "BrotCommander";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
 }

@@ -50,4 +50,8 @@ public class KarmaStatsCommand extends BasicCommand {
 		}
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
 }

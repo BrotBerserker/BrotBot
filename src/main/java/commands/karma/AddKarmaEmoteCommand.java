@@ -84,4 +84,9 @@ public class AddKarmaEmoteCommand extends BasicCommand {
 		return "!addkarmaemote :pogchamp: 5";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Karma";
+	}
+
 }

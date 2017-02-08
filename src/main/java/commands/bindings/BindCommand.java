@@ -61,4 +61,9 @@ public class BindCommand extends BasicCommand {
 		return "!bind rip = lel rekt in ripperonis m8 \n-> When a user sends \"rip\", the bot will respond with \"lel rekt in ripperonis m8\"";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Bindings";
+	}
+
 }

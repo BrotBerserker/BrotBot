@@ -1,6 +1,12 @@
 package commands.general;
 
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import commands.base.BasicCommand;
 import exceptions.CommandExecutionException;
@@ -50,21 +56,41 @@ public class HelpCommand extends BasicCommand {
 		// }
 		// bob.append("```");
 
-		EmbedBuilder builder = new EmbedBuilder();
-		builder.setAuthor("BrotBot", null, "http://sim02.in.com/2db976709326c7c1e184783e2beefc86_m.jpg");
-		builder.setColor(Color.RED);
-		builder.setDescription("Available Commands");
+		// EmbedBuilder builder = createEmbedBuilder();
+		// for (BasicCommand command : commandListener.getCommands()) {
+		// builder.addField("!" + command.getName(),
+		// command.getShortDescription(), false);
+		// }
+		Map<String, EmbedBuilder> map = new HashMap<String, EmbedBuilder>();
 		for (BasicCommand command : commandListener.getCommands()) {
-			builder.addField("!" + command.getName(), command.getShortDescription(), false);
+			String category = command.getCategory();
+			if (!map.containsKey(category)) {
+				map.put(category, createEmbedBuilder(category));
+			}
+			map.get(category).addField("!" + command.getName(), command.getShortDescription(), false);
 		}
 
-		try {
-			event.getAuthor().openPrivateChannel().block();
-			event.getAuthor().getPrivateChannel().sendMessage(builder.build()).queue();
-			return "Yo " + event.getAuthor().getAsMention() + ", ich hab dir die Liste geschickt.";
-		} catch (RateLimitedException e) {
-			throw new CommandExecutionException(e);
+		List<String> sortedKeys = Arrays.asList(map.keySet().toArray(new String[] {}));
+		Collections.sort(sortedKeys);
+
+		for (String key : sortedKeys) {
+			try {
+				event.getAuthor().openPrivateChannel().block();
+				event.getAuthor().getPrivateChannel().sendMessage(map.get(key).build()).queue();
+			} catch (RateLimitedException e) {
+				throw new CommandExecutionException(e);
+			}
 		}
+
+		return "Yo " + event.getAuthor().getAsMention() + ", ich hab dir die Liste geschickt.";
+	}
+
+	private EmbedBuilder createEmbedBuilder(String category) {
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setAuthor(category, null, "http://sim02.in.com/2db976709326c7c1e184783e2beefc86_m.jpg");
+		Random random = new Random();
+		builder.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
+		return builder;
 	}
 
 	@Override

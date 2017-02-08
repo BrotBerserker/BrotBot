@@ -80,6 +80,11 @@ public class TranslateCommand extends BasicCommand {
 		return "Please mention a user as 1. parameter and provide valid languages as 2. and 3. parameters! Use `!languages` to get a list of available languages!";
 	}
 
+	@Override
+	public String getCategory() {
+		return "Translation";
+	}
+
 	class TranslateListener extends BasicChatListener {
 
 		User user;
