@@ -4,7 +4,7 @@ BrotBot, a Discord Bot for doing usual and unusual stuff.
 ## Features
 - Make the Bot react to certain chat messages!
 - Let the Bot translate everything you write!
-- Karma system using reaction emotes! (of course fully configurable)
+- Karma system using reaction emotes (of course fully configurable)!
 - Create polls to find teammates!
 - Randomly insult users!
 
