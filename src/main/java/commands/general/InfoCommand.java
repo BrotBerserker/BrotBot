@@ -22,14 +22,14 @@ public class InfoCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
 		String s = "```apache\n# About BrotBot\n" + "Author: BrotBerserker\n" + "Language: Java 1.8\n" + "Framework: JDA (Java Discord API)\n"
 				+ "GitHub: https://github.com/BrotBerserker/BrotBot\n" + "Trello: https://trello.com/b/MsDs9PZg/brotbot\n" + "```";
 		return s;
 	}
 
 	@Override
-	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+	public String executePrivate(MessageReceivedEvent event, String... parameters) throws Exception {
 		return execute(event, parameters);
 	}
 

@@ -54,7 +54,7 @@ public class CommandListener extends BasicChatListener {
 	}
 
 	@Override
-	protected void handlePublicMessage(MessageReceivedEvent event) {
+	protected void handlePublicMessage(MessageReceivedEvent event) throws Exception {
 		String message = event.getMessage().getRawContent();
 		for (BasicCommand command : commands) {
 			if (message.equals("!" + command.getName() + " -help")) {
@@ -83,7 +83,7 @@ public class CommandListener extends BasicChatListener {
 		return false;
 	}
 
-	private String handleCommand(MessageReceivedEvent event, BasicCommand command) {
+	private String handleCommand(MessageReceivedEvent event, BasicCommand command) throws Exception {
 		if (command.getRequiredParameterCount() == 0) {
 			return handleCommandWithoutParams(event, command);
 		} else {
@@ -91,7 +91,7 @@ public class CommandListener extends BasicChatListener {
 		}
 	}
 
-	private String handleCommandWithoutParams(MessageReceivedEvent event, BasicCommand command) {
+	private String handleCommandWithoutParams(MessageReceivedEvent event, BasicCommand command) throws Exception {
 		if (command.isExecutable(event)) {
 			return executeCommand(event, command);
 		} else {
@@ -99,7 +99,7 @@ public class CommandListener extends BasicChatListener {
 		}
 	}
 
-	private String handleCommandWithParams(MessageReceivedEvent event, BasicCommand command) {
+	private String handleCommandWithParams(MessageReceivedEvent event, BasicCommand command) throws Exception {
 		String message = event.getMessage().getRawContent();
 		if (!message.startsWith("!" + command.getName() + " ")) {
 			throw new CommandExecutionException("No parameters were given! Try `!" + command.getName() + " -help`");
@@ -117,7 +117,7 @@ public class CommandListener extends BasicChatListener {
 		}
 	}
 
-	private String executeCommand(MessageReceivedEvent event, BasicCommand command, String... parameters) {
+	private String executeCommand(MessageReceivedEvent event, BasicCommand command, String... parameters) throws Exception {
 		if (event.getChannelType() == ChannelType.PRIVATE) {
 			return command.executePrivate(event, parameters);
 		}

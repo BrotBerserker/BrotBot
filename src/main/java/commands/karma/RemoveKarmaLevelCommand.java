@@ -1,7 +1,6 @@
 package commands.karma;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
@@ -30,14 +29,10 @@ public class RemoveKarmaLevelCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
-		try {
-			PropertiesHandler karmaLevels = PropertiesManager.getKarmaLevelsForGuild(event.getGuild());
-			boolean removed = karmaLevels.remove(parameters[0]);
-			return removed ? "Removed Karma level!" : "There was nothing to remove!";
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
+		PropertiesHandler karmaLevels = PropertiesManager.getKarmaLevelsForGuild(event.getGuild());
+		boolean removed = karmaLevels.remove(parameters[0]);
+		return removed ? "Removed Karma level!" : "There was nothing to remove!";
 	}
 
 	@Override

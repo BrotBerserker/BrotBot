@@ -5,7 +5,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequest;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import listeners.base.BasicChatListener;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.User;
@@ -37,26 +36,22 @@ public class TranslateCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
 		User user = event.getMessage().getMentionedUsers().get(0);
 		String username = user.getName() + "#" + user.getDiscriminator();
 
-		try {
-			PropertiesHandler translations = PropertiesManager.getTranslationsForGuild(event.getGuild());
-			String newTranslation = parameters[1] + "-" + parameters[2];
-			if (translations.contains(username)) {
-				if (translations.get(username).contains(newTranslation)) {
-					return user.getName() + " already speaks \"" + parameters[2] + "\"!";
-				}
-				translations.add(username, translations.get(username) + "," + newTranslation);
-			} else {
-				translations.add(username, newTranslation);
+		PropertiesHandler translations = PropertiesManager.getTranslationsForGuild(event.getGuild());
+		String newTranslation = parameters[1] + "-" + parameters[2];
+		if (translations.contains(username)) {
+			if (translations.get(username).contains(newTranslation)) {
+				return user.getName() + " already speaks \"" + parameters[2] + "\"!";
 			}
-			event.getJDA().addEventListener(new TranslateListener(event.getJDA(), user, parameters[1], parameters[2]));
-			return user.getName() + " now speaks \"" + parameters[2] + "\"!";
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
+			translations.add(username, translations.get(username) + "," + newTranslation);
+		} else {
+			translations.add(username, newTranslation);
 		}
+		event.getJDA().addEventListener(new TranslateListener(event.getJDA(), user, parameters[1], parameters[2]));
+		return user.getName() + " now speaks \"" + parameters[2] + "\"!";
 	}
 
 	@Override
@@ -69,7 +64,11 @@ public class TranslateCommand extends BasicCommand {
 		if (event.getMessage().getMentionedUsers().size() != 1) {
 			return false;
 		}
-		if (!new LanguagesCommand().execute(event, parameters).contains(parameters[1] + "-" + parameters[2])) {
+		try {
+			if (!new LanguagesCommand().execute(event, parameters).contains(parameters[1] + "-" + parameters[2])) {
+				return false;
+			}
+		} catch (Exception e) {
 			return false;
 		}
 		return true;

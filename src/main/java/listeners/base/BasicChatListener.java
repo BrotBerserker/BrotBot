@@ -36,7 +36,7 @@ public abstract class BasicChatListener extends ListenerAdapter {
 				handlePublicMessage(event);
 			}
 		} catch (CommandExecutionException e) {
-			System.out.println(e.getMessage());
+			System.out.println("CommandExecutionException: " + e.getMessage());
 			send(event, ":no_entry: Error: " + e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();

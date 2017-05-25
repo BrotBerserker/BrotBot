@@ -43,7 +43,7 @@ public class HelpCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
 		// StringBuilder bob = new StringBuilder(
 		// "Hi, faggot!\n\nHere is a list of available commands. Type `!command
 		// -help` here or in a group chat to get detailed information on a
@@ -99,7 +99,7 @@ public class HelpCommand extends BasicCommand {
 	}
 
 	@Override
-	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+	public String executePrivate(MessageReceivedEvent event, String... parameters) throws Exception {
 		execute(event, parameters);
 		return " ";
 	}

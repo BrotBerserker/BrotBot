@@ -49,8 +49,10 @@ public abstract class BasicCommand {
 	 *            {@link #getRequiredParameterCount()}.
 	 * @return A message that will be send to the text chat in which the command
 	 *         has been called
+	 * @throws Exception
+	 *             Might throw any kind of exception while executing the command
 	 */
-	public abstract String execute(MessageReceivedEvent event, String... parameters);
+	public abstract String execute(MessageReceivedEvent event, String... parameters) throws Exception;
 
 	/**
 	 * Similar to {@link #execute(MessageReceivedEvent, String...)}, but is
@@ -65,8 +67,10 @@ public abstract class BasicCommand {
 	 *            {@link #getRequiredParameterCount()}.
 	 * @return A message that will be send to the private chat in which the
 	 *         command has been called
+	 * @throws Exception
+	 *             Might throw any kind of exception while executing the command
 	 */
-	public String executePrivate(MessageReceivedEvent event, String... parameters) {
+	public String executePrivate(MessageReceivedEvent event, String... parameters) throws Exception {
 		throw new CommandExecutionException("This command's functionality is not yet implemented for private channels, but will be soon!");
 	}
 

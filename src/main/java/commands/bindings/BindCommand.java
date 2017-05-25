@@ -1,7 +1,6 @@
 package commands.bindings;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
@@ -25,14 +24,10 @@ public class BindCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
-		try {
-			PropertiesHandler bindings = PropertiesManager.getChatBindingsForGuild(event.getGuild());
-			boolean updated = bindings.add(parameters[0].trim(), parameters[1].trim());
-			return "Binding for \"" + parameters[0].trim() + "\" " + (updated ? "updated!" : "created!");
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
+		PropertiesHandler bindings = PropertiesManager.getChatBindingsForGuild(event.getGuild());
+		boolean updated = bindings.add(parameters[0].trim(), parameters[1].trim());
+		return "Binding for \"" + parameters[0].trim() + "\" " + (updated ? "updated!" : "created!");
 	}
 
 	@Override

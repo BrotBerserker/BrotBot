@@ -1,7 +1,6 @@
 package commands.karma;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
@@ -31,15 +30,11 @@ public class AddKarmaEmoteCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
-		try {
-			Emote emote = getEmote(event, parameters[0]);
-			PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
-			karmaEmotes.add(emote.toString(), parameters[1].trim());
-			return "Reaction " + emote.getAsMention() + " now gives " + parameters[1].trim() + " Karma!";
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
+		Emote emote = getEmote(event, parameters[0]);
+		PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
+		karmaEmotes.add(emote.toString(), parameters[1].trim());
+		return "Reaction " + emote.getAsMention() + " now gives " + parameters[1].trim() + " Karma!";
 	}
 
 	@Override

@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import listeners.base.BasicChatListener;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 /**
  * Asks if someone wants to play a certain game.
@@ -35,16 +33,11 @@ public class PlayCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
 		game = parameters[0];
 		players = new ArrayList<String>();
 		players.add(event.getAuthor().getName());
-		try {
-			message = event.getChannel().sendMessage(getMessage()).block();
-		} catch (RateLimitedException e) {
-			e.printStackTrace();
-			throw new CommandExecutionException(e);
-		}
+		message = event.getChannel().sendMessage(getMessage()).block();
 		if (listener == null) {
 			listener = new PlusListener(event.getJDA());
 			event.getJDA().addEventListener(listener);

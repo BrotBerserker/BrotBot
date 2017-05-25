@@ -1,7 +1,6 @@
 package commands.bindings;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
 import properties.PropertiesManager;
@@ -36,14 +35,10 @@ public class BindRegexCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
-		try {
-			PropertiesHandler bindings = PropertiesManager.getRegexBindingsForGuild(event.getGuild());
-			boolean updated = bindings.add(parameters[0].trim(), parameters[1].trim());
-			return "Regex binding for \"" + parameters[0].trim() + "\" " + (updated ? "updated!" : "created!");
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
+		PropertiesHandler bindings = PropertiesManager.getRegexBindingsForGuild(event.getGuild());
+		boolean updated = bindings.add(parameters[0].trim(), parameters[1].trim());
+		return "Regex binding for \"" + parameters[0].trim() + "\" " + (updated ? "updated!" : "created!");
 	}
 
 	@Override

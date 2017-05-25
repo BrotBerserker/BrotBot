@@ -4,7 +4,6 @@
 package commands.karma;
 
 import commands.base.BasicCommand;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
@@ -34,15 +33,11 @@ public class RemoveKarmaEmoteCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
-		try {
-			Emote emote = getEmote(event, parameters[0]);
-			PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
-			boolean removed = karmaEmotes.remove(emote.toString());
-			return removed ? "Removed Karma emote!" : "There was nothing to remove!";
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
+		Emote emote = getEmote(event, parameters[0]);
+		PropertiesHandler karmaEmotes = PropertiesManager.getKarmaEmotesForGuild(event.getGuild());
+		boolean removed = karmaEmotes.remove(emote.toString());
+		return removed ? "Removed Karma emote!" : "There was nothing to remove!";
 	}
 
 	@Override

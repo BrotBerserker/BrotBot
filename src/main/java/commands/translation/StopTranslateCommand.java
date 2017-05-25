@@ -2,7 +2,6 @@ package commands.translation;
 
 import commands.base.BasicCommand;
 import commands.translation.TranslateCommand.TranslateListener;
-import exceptions.CommandExecutionException;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import properties.PropertiesHandler;
@@ -32,22 +31,18 @@ public class StopTranslateCommand extends BasicCommand {
 	}
 
 	@Override
-	public String execute(MessageReceivedEvent event, String... parameters) {
+	public String execute(MessageReceivedEvent event, String... parameters) throws Exception {
 		User user = event.getMessage().getMentionedUsers().get(0);
-		try {
-			for (Object listener : event.getJDA().getRegisteredListeners()) {
-				if (listener instanceof TranslateListener) {
-					if (((TranslateListener) listener).user.equals(user)) {
-						event.getJDA().removeEventListener(listener);
-					}
+		for (Object listener : event.getJDA().getRegisteredListeners()) {
+			if (listener instanceof TranslateListener) {
+				if (((TranslateListener) listener).user.equals(user)) {
+					event.getJDA().removeEventListener(listener);
 				}
 			}
-			PropertiesHandler translations = PropertiesManager.getTranslationsForGuild(event.getGuild());
-			boolean removed = translations.remove(user.getName() + "#" + user.getDiscriminator());
-			return removed ? "Stopped translation for " + user.getName() + "!" : "There was no translation to stop!";
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
 		}
+		PropertiesHandler translations = PropertiesManager.getTranslationsForGuild(event.getGuild());
+		boolean removed = translations.remove(user.getName() + "#" + user.getDiscriminator());
+		return removed ? "Stopped translation for " + user.getName() + "!" : "There was no translation to stop!";
 	}
 
 	@Override
