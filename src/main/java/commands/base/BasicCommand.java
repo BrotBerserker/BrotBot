@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import commands.general.HelpCommand;
 import exceptions.CommandExecutionException;
-import listeners.custom.CommandListener;
+import listeners.functional.CommandListener;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

@@ -10,7 +10,7 @@ import java.util.Random;
 
 import commands.base.BasicCommand;
 import exceptions.CommandExecutionException;
-import listeners.custom.CommandListener;
+import listeners.functional.CommandListener;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;

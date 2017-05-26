@@ -12,9 +12,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
+
+import listeners.functional.BindingsListener;
+
 import java.util.Properties;
 
-import listeners.custom.BindingsListener;
 import net.dv8tion.jda.core.entities.Guild;
 
 /**
